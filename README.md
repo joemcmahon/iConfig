@@ -8,6 +8,8 @@ This is a community-maintained fork of the [original iConnectivity source releas
 
 Builds and runs on Apple Silicon Macs running macOS 12 Monterey or later. The UI is functional — device selection, MIDI routing, audio configuration, mixer, patchbay, and firmware upgrade dialogs all work.
 
+**Caveat:** this port has been verified to compile and launch, and the UI navigates correctly, but has not yet been tested extensively with physical iConnectivity hardware. The changes made are mechanical API-compatibility fixes with no intentional behaviour changes, but we cannot guarantee the code is 100% functional and faithful to the original without thorough on-device testing. Use with that in mind, and please open an issue if you find something broken.
+
 ## Prerequisites
 
 ### 1. Xcode Command Line Tools
