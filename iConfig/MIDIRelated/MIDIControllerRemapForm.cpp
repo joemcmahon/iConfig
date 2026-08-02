@@ -78,7 +78,7 @@ MIDIControllerRemapForm::MIDIControllerRemapForm(DeviceInfoPtr _device,
 
   auto *const gridLayout = new QGridLayout(ui->portSelectionContainer);
   gridLayout->addWidget(portSelectionForm, 0, 0, 1, 1);
-  gridLayout->setMargin(0);
+  gridLayout->setContentsMargins(0, 0, 0, 0);
   gridLayout->setSpacing(0);
   gridLayout->setVerticalSpacing(0);
 
@@ -154,10 +154,10 @@ MIDIControllerRemapForm::MIDIControllerRemapForm(DeviceInfoPtr _device,
   ui->tableWidget->setHorizontalHeaderLabels(horzHeaderList);
 
   auto *const horzHeader = ui->tableWidget->horizontalHeader();
-  horzHeader->setResizeMode(QHeaderView::Fixed);
+  horzHeader->setSectionResizeMode(QHeaderView::Fixed);
   horzHeader->setDefaultSectionSize(25);
-  horzHeader->setResizeMode(horzHeaderList.count() - 2, QHeaderView::Stretch);
-  horzHeader->setResizeMode(horzHeaderList.count() - 1, QHeaderView::Stretch);
+  horzHeader->setSectionResizeMode(horzHeaderList.count() - 2, QHeaderView::Stretch);
+  horzHeader->setSectionResizeMode(horzHeaderList.count() - 1, QHeaderView::Stretch);
 
   // add comboBoxes
   srcSignalMapper = new QSignalMapper(this);

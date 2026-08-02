@@ -12,6 +12,7 @@
 
 #include <QFileDialog>
 #include <QDesktopServices>
+#include <QStandardPaths>
 #include <QMessageBox>
 #include <QDebug>
 
@@ -35,8 +36,8 @@ ICRestoreDialog::~ICRestoreDialog()
 }
 
 void ICRestoreDialog::loadFiles() {
-  QDir::root().mkpath(QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/presets");
-  QDir presetsDir = QDir(QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/presets");
+  QDir::root().mkpath(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/presets");
+  QDir presetsDir = QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/presets");
 
   qDebug() << "Preset Device:" << MainWindow::extensionForPID(currentDevice->getPID());
 
@@ -62,7 +63,7 @@ void ICRestoreDialog::handleSelectionChanged() {
 }
 
 void ICRestoreDialog::loadDescription(const QString index) {
-  fileName = QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/presets/" + index;
+  fileName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/presets/" + index;
 
   QFile file(fileName);
   if (!file.open(QFile::ReadOnly)) {

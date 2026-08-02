@@ -55,7 +55,9 @@
 #include <QFileDialog>
 #include <QString>
 #include <QSettings>
+#include <QActionGroup>
 #include <QDesktopServices>
+#include <QStandardPaths>
 #include <QDateTime>
 #include <QDebug>
 #include <QFileDialog>
@@ -392,8 +394,8 @@ void MainWindow::on_actionClose_triggered() {
                 doFirmwareCheck = true;
               }
               else if (freq != 3) {
-                uint lastCheck = settings.value("lastCheck", QDateTime::currentDateTime().toTime_t()).toUInt();
-                uint now = QDateTime::currentDateTime().toTime_t();
+                uint lastCheck = settings.value("lastCheck", (quint64)QDateTime::currentDateTime().toSecsSinceEpoch()).toUInt();
+                uint now = (uint)QDateTime::currentDateTime().toSecsSinceEpoch();
 
                 if (freq == 1 && ((now - lastCheck) > (7 * 24 * 60 * 60))) {
                   doFirmwareCheck = true;
@@ -403,7 +405,7 @@ void MainWindow::on_actionClose_triggered() {
                 }
               }
               if (doFirmwareCheck) {
-                settings.setValue("lastCheck", QDateTime::currentDateTime().toTime_t());
+                settings.setValue("lastCheck", (quint64)QDateTime::currentDateTime().toSecsSinceEpoch());
                 QPointer<FirmwareUpgradeDialog> firmwareDialog(
                       new FirmwareUpgradeDialog(this->comm, this->currentDevice,
                                                 FirmwareMode::CheckMode, this));
@@ -631,7 +633,7 @@ void MainWindow::on_actionOpen_triggered() {
 }
 
 void MainWindow::on_actionOpenPresetsFolder_triggered() {
-  QDesktopServices::openUrl( QUrl::fromLocalFile( QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/presets" ) );
+  QDesktopServices::openUrl( QUrl::fromLocalFile( QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/presets" ) );
 }
 
 void MainWindow::clearLayout(QLayout* layout)
@@ -1667,7 +1669,7 @@ void MainWindow::on_actionSoftware_Manual_triggered() {
     const auto& deviceID = currentDevice->getDeviceID();
 
     QString formattedString;
-    formattedString.sprintf(
+    formattedString = QString::asprintf(
           "https://support.iconnectivity.com/support/iconfig/%04d/macPC/",
           deviceID.pid());
     QDesktopServices::openUrl(QUrl(formattedString));

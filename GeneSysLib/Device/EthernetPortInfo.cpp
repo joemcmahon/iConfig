@@ -113,7 +113,7 @@ void EthernetPortInfo::parse(BytesIter &beginIter, BytesIter &endIter) {
     // for compatibility with older demo units this check can't be asserted
     if (distance(beginIter, endIter) >= 12) {
       macAddress = roString(string(beginIter, beginIter + 12));
-      advance(beginIter, 12);
+      std::advance(beginIter, 12);
     }
 
     size_t deviceLength = static_cast<size_t>(nextMidiByte(beginIter, endIter));

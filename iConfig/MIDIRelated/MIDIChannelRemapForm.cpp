@@ -63,7 +63,7 @@ MIDIChannelRemapForm::MIDIChannelRemapForm(CommPtr _comm, DeviceInfoPtr _device,
 
   auto *const gridLayout = new QGridLayout(ui->portSelectionContainer);
   gridLayout->addWidget(portSelectionForm, 0, 0, 1, 1);
-  gridLayout->setMargin(0);
+  gridLayout->setContentsMargins(0, 0, 0, 0);
   gridLayout->setSpacing(0);
   gridLayout->setVerticalSpacing(0);
 
@@ -97,7 +97,7 @@ MIDIChannelRemapForm::MIDIChannelRemapForm(CommPtr _comm, DeviceInfoPtr _device,
   ui->tableWidget->setHorizontalHeaderLabels(horzHeaderList);
   auto *const horzHeader = ui->tableWidget->horizontalHeader();
   Q_ASSERT(horzHeader);
-  horzHeader->setResizeMode(QHeaderView::Stretch);
+  horzHeader->setSectionResizeMode(QHeaderView::Stretch);
 
   tableListener->addCornerLabel("Channel");
 

@@ -165,11 +165,11 @@ bool DeviceInfo::startQuery(Screen screen, const CommandQList& query) {
 
     // Queries before
     if (currentQuery.empty()) {
-      currentQuery = query.toStdList();
+      currentQuery = std::list<GeneSysLib::CmdEnum>(query.begin(), query.end());
     }
     else {
       pendingQueriesMutex.lock();
-      pendingQueries.push(boost::make_tuple(screen, query.toStdList()));
+      pendingQueries.push(boost::make_tuple(screen, std::list<GeneSysLib::CmdEnum>(query.begin(), query.end())));
       pendingQueriesMutex.unlock();
       currentQueryMutex.unlock();
       return result;
@@ -184,7 +184,7 @@ bool DeviceInfo::startQuery(Screen screen, const CommandQList& query) {
   } else {
     currentQueryMutex.unlock();
     pendingQueriesMutex.lock();
-    pendingQueries.push(boost::make_tuple(screen, query.toStdList()));
+    pendingQueries.push(boost::make_tuple(screen, std::list<GeneSysLib::CmdEnum>(query.begin(), query.end())));
     pendingQueriesMutex.unlock();
   }
 
@@ -533,7 +533,7 @@ bool DeviceInfo::sendNextSysex() {
 
       // post the current query
       queriedItemsMutex.lock();
-      queriedItems = queriedItems.toSet().toList();
+      { QSet<GeneSysLib::CmdEnum> s(queriedItems.begin(), queriedItems.end()); queriedItems = CommandQList(s.begin(), s.end()); }
       queriedItemsMutex.unlock();
 
       if (queryScreen != UnknownScreen) {
@@ -1213,7 +1213,7 @@ Bytes DeviceInfo::serialize2(std::set<Command::Enum> commandsToSave, QString des
   description = description.mid(0,239);
   result += (unsigned char) description.size();
   for (int x = 0; x < description.size(); x++) {
-    result += description.at(x).toAscii();
+    result += description.at(x).toLatin1();
   }
 
   for (const auto& cmdPair : storedCommandData) {

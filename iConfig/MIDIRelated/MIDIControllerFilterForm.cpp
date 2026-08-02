@@ -89,7 +89,7 @@ MIDIControllerFilterForm::MIDIControllerFilterForm(CommPtr _comm,
 
   auto *const gridLayout = new QGridLayout(ui->portSelectionContainer);
   gridLayout->addWidget(portSelectionForm, 0, 0, 1, 1);
-  gridLayout->setMargin(0);
+  gridLayout->setContentsMargins(0, 0, 0, 0);
   gridLayout->setSpacing(0);
   gridLayout->setVerticalSpacing(0);
 
@@ -140,9 +140,9 @@ MIDIControllerFilterForm::MIDIControllerFilterForm(CommPtr _comm,
 
   auto *const horzHeader = ui->tableWidget->horizontalHeader();
   Q_ASSERT(horzHeader);
-  horzHeader->setResizeMode(QHeaderView::Fixed);
+  horzHeader->setSectionResizeMode(QHeaderView::Fixed);
   horzHeader->setDefaultSectionSize(25);
-  horzHeader->setResizeMode(horzHeaderList.count() - 1, QHeaderView::Stretch);
+  horzHeader->setSectionResizeMode(horzHeaderList.count() - 1, QHeaderView::Stretch);
 
   tableListener->addCornerLabel(tr("Channel"));
 

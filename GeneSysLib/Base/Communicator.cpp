@@ -388,14 +388,14 @@ bool Communicator::openAllInputs() {
   try {
     unsigned int inCount = getInCount();
     for (unsigned int i = 0; i < inCount; ++i) {
-      auto pIn = auto_ptr<RtMidiIn>(new RtMidiIn());
+      auto pIn = std::unique_ptr<RtMidiIn>(new RtMidiIn());
 
       pIn->openPort(i);
       pIn->ignoreTypes(false);
 
       pIn->setCallback(readCallback, this);
 
-      m_midiIn.push_back(pIn);
+      m_midiIn.push_back(std::move(pIn));
     }
   }
   catch (...) {

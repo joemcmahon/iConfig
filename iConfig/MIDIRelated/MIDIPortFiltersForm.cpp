@@ -97,7 +97,7 @@ MIDIPortFiltersForm::MIDIPortFiltersForm(CommPtr _comm, DeviceInfoPtr _device,
   // generate a grid layout for the port selection form
   auto *const gridLayout = new QGridLayout(ui->portSelectionContainer);
   gridLayout->addWidget(portSelectionForm, 0, 0, 1, 1);
-  gridLayout->setMargin(0);
+  gridLayout->setContentsMargins(0, 0, 0, 0);
   gridLayout->setSpacing(0);
   gridLayout->setVerticalSpacing(0);
 
@@ -193,7 +193,7 @@ MIDIPortFiltersForm::MIDIPortFiltersForm(CommPtr _comm, DeviceInfoPtr _device,
   // assert that the horizontal header is valid
   Q_ASSERT(horzHeader);
   // set the resize mode for the horizontal header to stretch with the parent
-  horzHeader->setResizeMode(QHeaderView::Stretch);
+  horzHeader->setSectionResizeMode(QHeaderView::Stretch);
 
   // loop through all rows
   for (auto row = 0; row < ui->tableWidget->rowCount();

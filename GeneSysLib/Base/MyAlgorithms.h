@@ -9,9 +9,12 @@
 #define __MYALGORITHMS_H__
 
 #include "LibTypes.h"
+#include <list>
 #include <map>
+#include <set>
+#include <vector>
 #ifndef Q_MOC_RUN
-#include <boost/tr1/unordered_map.hpp>
+#include <unordered_map>
 #endif
 
 namespace MyAlgorithms {
@@ -40,7 +43,7 @@ bool contains(const std::map<Key, T>& map, const Key& key) {
 }
 
 template <class Key, class T>
-bool contains(const std::tr1::unordered_map<Key, T>& map, const Key& key) {
+bool contains(const std::unordered_map<Key, T>& map, const Key& key) {
   return map.find(key) != map.end();
 }
 

@@ -20,7 +20,7 @@ void USBDevice::parse(BytesIter &beginIter, BytesIter &endIter) {
   Byte length = nextMidiByte(beginIter, endIter);
   if (length > 0) {
     m_hostName = string(beginIter, (beginIter + length));
-    advance(beginIter, length);
+    std::advance(beginIter, length);
   }
 }
 HostType::Enum USBDevice::hostType() const { return m_hostType; }
@@ -107,13 +107,13 @@ void USBHost::parse(BytesIter &beginIter, BytesIter &endIter) {
 
   if (length > 0) {
     m_vendorName = string(beginIter, (beginIter + length));
-    advance(beginIter, length);
+    std::advance(beginIter, length);
   }
 
   length = nextMidiByte(beginIter, endIter);
   if (length > 0) {
     m_productName = string(beginIter, (beginIter + length));
-    advance(beginIter, length);
+    std::advance(beginIter, length);
   }
 }
 

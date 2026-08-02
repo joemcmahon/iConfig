@@ -11,7 +11,7 @@
 #include "LibTypes.h"
 
 #include <QString>
-#include <QRegExp>
+#include <QRegularExpression>
 
 namespace NetAddrTools {
 
@@ -19,7 +19,7 @@ QString fromNetAddr(const NetAddr &netAddr);
 
 NetAddr toNetAddr(QString value);
 
-QRegExp ipRegEx();
+QRegularExpression ipRegEx();
 
 }  // namespace NetAddrTools
 

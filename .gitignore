@@ -1,1 +1,18 @@
 .DS_Store
+
+# qmake build artifacts
+Makefile
+.qmake.stash
+*.o
+*.o.tmp
+moc_*.cpp
+moc_predefs.h
+qrc_*.cpp
+ui_*.h
+*.a
+*.app/
+
+# XCode build dirs
+build/
+DerivedData/
+*.xcuserstate

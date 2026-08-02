@@ -96,7 +96,7 @@ DeviceInfoPtr DeviceSelectionDialog::getSelectedDevice() {
   DeviceInfoPtr selectedDevice;
 
   deviceMutex.lock();
-  if ((ui->listWidget >= 0) &&
+  if ((ui->listWidget != nullptr) &&
       (ui->listWidget->currentRow() < (int) devices.size())) {
     auto item = devices.begin();
     for (auto i = 0; i < ui->listWidget->currentRow(); ++i) {
